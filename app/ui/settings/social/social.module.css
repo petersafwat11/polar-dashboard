@@ -1,0 +1,21 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+.title {
+  color: #343c6a;
+  font-size: 22px;
+  font-weight: 600;
+  margin-top: 28px;
+}
+
+.links {
+  display: flex;
+  flex-direction: column;
+  gap: 27px;
+  padding: 26px 35px;
+}
+.btn{
+    margin-left: 78px;
+}

@@ -1,6 +1,10 @@
 .container {
-  padding: 10.34rem 11.22rem 10.56rem 9.5rem;
+  padding: 83px 2% 5rem 290px;
 }
+
+/* .container {
+  padding: 10.34rem 11.22rem 10.56rem 9.5rem;
+} */
 .title {
   color: #000000;
   font-size: 1.98rem;

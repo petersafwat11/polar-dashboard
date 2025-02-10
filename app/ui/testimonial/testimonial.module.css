@@ -1,0 +1,45 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+.title {
+  color: #343c6a;
+  font-size: 22px;
+  font-weight: 600;
+  margin-top: 28px;
+}
+.data {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+.btn {
+  margin-left: 90px;
+}
+.inputs {
+  display: flex;
+  gap: 40px;
+}
+.input-wrapper {
+  padding: 26px 66px 36px 35px;
+}
+.textarea-wrapper {
+  padding: 36px 61px 31px 35px;
+}
+.text-area {
+  width: 585.408px;
+  height: 111px;
+  border-radius: 15px;
+  border: 1px solid #dfeaf2;
+  background: #fff;
+  outline: none;
+  resize: none;
+  padding: 15px 20px;
+  font-size: 13px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+  text-transform: lowercase;
+  color: #575757;
+}

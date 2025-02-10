@@ -21,18 +21,18 @@ const Wrapper = ({ dataFetched, paginations }) => {
     checkboxClicked(elemID, selectedItems, setSelectedItems);
   };
 
-  const createCourse = async () => {
+  const createTestimonial = async () => {
     setIsLoading(true);
     try {
       await createItem(pathname, router);
     } catch (error) {
-      toast.error("Failed to create course listing");
+      toast.error("Failed to create testimonial");
     } finally {
       setIsLoading(false);
     }
   };
 
-  const deleteCourses = async () => {
+  const deleteTestimonials = async () => {
     setIsLoading(true);
     try {
       await deleteItem(
@@ -40,11 +40,11 @@ const Wrapper = ({ dataFetched, paginations }) => {
         selectedItems,
         setTableData,
         setSelectedItems,
-        "courses"
+        "testimonials"
       );
-      toast.success("Courses deleted successfully");
+      toast.success("Testimonials deleted successfully");
     } catch (error) {
-      toast.error("Failed to delete courses");
+      toast.error("Failed to delete testimonials");
     } finally {
       setIsLoading(false);
       toggleDeleteAlert();
@@ -66,22 +66,21 @@ const Wrapper = ({ dataFetched, paginations }) => {
   return (
     <div className={classes["container"]}>
       <Toaster position="top-center" reverseOrder={false} />
-
       {deleteAlert && (
         <Popup>
-          <DeleteAlert
-            cancelFunc={toggleDeleteAlert}
-            deleteFunc={deleteCourses}
-            isLoading={isLoading}
+          <DeleteAlert 
+            cancelFunc={toggleDeleteAlert} 
+            deleteFunc={deleteTestimonials}
+            isLoading={isLoading} 
           />
         </Popup>
       )}
 
       <div className={classes["actions"]}>
         <ActionsButtons
-          firstButtonFunction={createCourse}
+          firstButtonFunction={createTestimonial}
           secondButtonFunction={toggleDeleteAlert}
-          first={"Create Course"}
+          first={"Create Testimonial"}
           second={"Delete Selected"}
           disabled={isLoading}
         />

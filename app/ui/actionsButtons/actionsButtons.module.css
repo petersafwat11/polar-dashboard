@@ -19,6 +19,7 @@
   font-family: "Roboto Condensed";
   font-weight: 500;
   cursor: pointer;
+  border: none;
 }
 
 .second-button {

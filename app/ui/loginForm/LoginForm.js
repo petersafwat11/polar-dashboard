@@ -1,65 +1,94 @@
 "use client";
 import axios from "axios";
-
 import Cookies from "js-cookie";
 import { useRouter } from "next/navigation";
 import React, { useState } from "react";
 import classes from "./loginForm.module.css";
 import InputGroup from "../inputGroup/InputGroup";
 import { roboto_condensed } from "@/app/fonts";
+import { toast, Toaster } from "react-hot-toast"; // Add toast notifications
 
 const LoginForm = () => {
   const router = useRouter();
   const [data, setData] = useState({ email: "", password: "" });
-  const [error, setError] = useState({ state: false, message: "" });
+  const [isLoading, setIsLoading] = useState(false); // Add loading state
+
+  const validateInputs = () => {
+    if (!data.email || !data.password) {
+      toast.error("Please enter both email and password");
+      return false;
+    }
+    if (!data.email.includes("@")) {
+      toast.error("Please enter a valid email address");
+      return false;
+    }
+    if (data.password.length < 8) {
+      toast.error("Password must be at least 8 characters");
+      return false;
+    }
+    return true;
+  };
+
   const handleSubmit = async () => {
+    if (!validateInputs()) return;
+
+    setIsLoading(true);
     try {
-      if (data.email.length < 1 || data.password.length < 1) {
-        setError({ state: true, message: "Error: you must enter both inputs" });
-      }
       const response = await axios.post(
         `${process.env.BACKEND_SERVER}/users/login`,
-        { email: data.email, password: data.password }
+        data
       );
-      console.log("response", response);
-      Cookies.set("user", JSON.stringify(response.data.data.user), {
+
+      // Store token in cookie
+      Cookies.set("trading-token", response.data.token, {
         expires: 1,
-      });
-      Cookies.set("token", response.data.token, {
-        expires: 1,
+        secure: process.env.NODE_ENV === "production",
+        sameSite: "Lax"  // Changed from "strict" to "Lax"
       });
 
-      router.push("/");
-    } catch (error) {
-      setError({
-        state: true,
-        message: "Error: either email or password is incorrect",
+      // Store user data
+      Cookies.set("trading-user", JSON.stringify(response.data.data.user), {
+        expires: 1,
+        secure: process.env.NODE_ENV === "production",
+        sameSite: "Lax"
       });
-      console.log("error", error);
+
+      toast.success("Login successful!");
+      // Add a slight delay before redirect
+      setTimeout(() => {
+        router.push("/");
+        router.refresh(); // Force a refresh of the page
+      }, 1000);
+    } catch (error) {
+      toast.error(error.response?.data?.message || "Login failed");
+    } finally {
+      setIsLoading(false);
     }
   };
+
   const handleKeyDown = (event) => {
-    if (event.key === "Enter") {
+    if (event.key === "Enter" && !isLoading) {
       handleSubmit();
     }
   };
 
   return (
     <div className={`${roboto_condensed.className} ${classes["container"]}`}>
+      <Toaster position="top-center" />
       <div className={classes["form"]}>
-        {error.state && <p className={classes["error"]}>{error.message}</p>}
-        
         <h1 className={classes["title"]}>Log In</h1>
 
         <InputGroup
-          placeHolder={"Please enter your email"}
+          placeHolder={"Enter your email"}
           handleKeyDown={handleKeyDown}
           id={"email"}
           type={"email"}
-          label={"Username or Email Address"}
+          label={"Email Address"}
           data={data}
           dataKey={"email"}
           setData={setData}
+          disabled={isLoading}
+          required
         />
         <InputGroup
           handleKeyDown={handleKeyDown}
@@ -69,11 +98,17 @@ const LoginForm = () => {
           data={data}
           dataKey={"password"}
           setData={setData}
-          placeHolder={"Please enter your Password"}
+          placeHolder={"Enter your password"}
+          disabled={isLoading}
+          required
         />
 
-        <button onClick={handleSubmit} className={classes["login-button"]}>
-          Log in
+        <button 
+          onClick={handleSubmit} 
+          className={classes["login-button"]}
+          disabled={isLoading}
+        >
+          {isLoading ? "Logging in..." : "Log in"}
         </button>
       </div>
     </div>

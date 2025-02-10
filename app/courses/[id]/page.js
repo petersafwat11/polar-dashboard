@@ -1,13 +1,12 @@
 import React from "react";
 import classes from "./page.module.css";
-import LoginForm from "../ui/loginForm/LoginForm";
-
-const Login = async () => {
+import Form from "@/app/ui/courses/form/Form";
+const page = () => {
   return (
     <div className={classes["page"]}>
-      <LoginForm />
+      <Form />
     </div>
   );
 };
 
-export default Login;
+export default page;

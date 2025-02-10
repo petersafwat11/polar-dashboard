@@ -1,0 +1,53 @@
+.input-group {
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  flex-direction: column;
+  gap: 10px;
+  width: 100%;
+}
+.label {
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 24px; /* 120% */
+  text-transform: uppercase;
+  color: black;
+}
+.input::placeholder {
+  color: gray;
+  font-size: 12px;
+}
+
+/* For browsers that support vendor prefixes */
+.input::-webkit-input-placeholder {
+  color: #7d8fb3;
+  font-size: 12px;
+}
+.input:-ms-input-placeholder {
+  color: #7d8fb3;
+  font-size: 12px;
+}
+.input::-moz-placeholder {
+  color: #7d8fb3;
+  font-size: 12px;
+}
+
+.input {
+  padding: 15px 27px;
+  color: #7d8fb3;
+  font-weight: 400;
+  font-size: 13px;
+  /* width: 100%; */
+  width: 297px;
+  height: 46px;
+  border-radius: 15px;
+  border: 1px solid #dfeaf2;
+  background: #fff;
+  transition: all 0.15s ease-in-out, ease-in-out;
+}
+.input:focus {
+  outline: none;
+  /* box-shadow: 0 0 0 0.25rem #0d6efd40; */
+  /* border: none; */
+}

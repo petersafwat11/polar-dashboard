@@ -1,0 +1,12 @@
+.container {
+  padding: 83px 2% 5rem 290px;
+}
+
+.title {
+  color: #000000;
+  font-size: 1.98rem;
+  line-height: 1.32rem;
+  font-weight: 700;
+  font-family: "Public Sans";
+  margin-bottom: 0.77rem;
+}

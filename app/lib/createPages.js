@@ -44,82 +44,30 @@ export const saveItem = async (
   pathname,
   data,
   dispatchDetail,
+  defaultData,
   router,
-  endpoint,
+  endpoint
 ) => {
-  let request;
-  if (!pathname.endsWith("create")) {
-    request = axios.patch(
-      `${process.env.BACKEND_SERVER}/${endpoint}/${pathname.split("/")[2]}
-      `,
-      data,
-      {
-        headers: {
-          Authorization: `Bearer ${Cookies.get("token")}`,
-        },
-      }
-    );
-  } else {
-    request = axios.post(
-      `${process.env.BACKEND_SERVER}/${endpoint}
-`,
-      data,
-      {
-        headers: {
-          Authorization: `Bearer ${Cookies.get("token")}`,
-        },
-      }
-    );
-  }
+  const isCreate = pathname.endsWith("create");
+  const baseUrl = `${process.env.BACKEND_SERVER}/${endpoint}`;
+  const url = isCreate ? baseUrl : `${baseUrl}/${pathname.split("/")[2]}`;
+  const method = isCreate ? "post" : "patch";
+
   try {
-    const dataSent = await request;
-    dispatchDetail({ type: "CLEAR-ALL" });
-    console.log(dataSent);
-    router.push(`${pathname.slice(0, pathname.lastIndexOf("/"))}`);
+    const response = await axios[method](url, data, {
+      headers: {
+        Authorization: `Bearer ${Cookies.get("token")}`,
+      },
+    });
+
+    dispatchDetail(defaultData);
+    
+    const redirectPath = pathname.slice(0, pathname.lastIndexOf("/"));
+    router.push(redirectPath);
+
+    return response.data;
   } catch (error) {
-    console.log("err", error);
-  }
-};
-export const saveServer = async (
-  data,
-  dispatchMainservers,
-  dispatchOtherservers,
-  router,
-  endpoint,
-  serversId,
-  requestType
-) => {
-  let request;
-  if (requestType === "PATCH") {
-    request = axios.patch(
-      `${process.env.BACKEND_SERVER}/${endpoint}/${serversId}
-        `,
-      data,
-      {
-        headers: {
-          Authorization: `Bearer ${Cookies.get("token")}`,
-        },
-      }
-    );
-  } else {
-    request = axios.post(
-      `${process.env.BACKEND_SERVER}/${endpoint}
-  `,
-      data,
-      {
-        headers: {
-          Authorization: `Bearer ${Cookies.get("token")}`,
-        },
-      }
-    );
-  }
-  try {
-    const dataSent = await request;
-    dispatchMainservers({ type: "CLEAR-ALL" });
-    dispatchOtherservers({ type: "CLEAR-ALL" });
-    console.dir(data);
-    router.push(`/sports`);
-  } catch (error) {
-    console.log("err", error);
+    // Throw error to be handled by caller
+    throw new Error(`Failed to ${isCreate ? 'create' : 'update'} ${endpoint}: ${error.message}`);
   }
 };
