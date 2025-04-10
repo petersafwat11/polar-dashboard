@@ -23,11 +23,11 @@ const Social = ({ socialData }) => {
   const handleSubmit = async () => {
     console.log(
       "data",
-      `${process.env.BACKEND_SERVER}/social/${socialData.data[0]?._id}`
+      `${process.env.NEXT_PUBLIC_BACKEND_SERVER}/social/${socialData.data[0]?._id}`
     );
     try {
       const response = await axios.patch(
-        `${process.env.BACKEND_SERVER}/social/${socialData.data[0]?._id}`,
+        `${process.env.NEXT_PUBLIC_BACKEND_SERVER}/social/${socialData.data[0]?._id}`,
         data
         // {
         //   headers: {

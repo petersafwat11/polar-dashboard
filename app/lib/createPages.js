@@ -4,7 +4,7 @@ import Cookies from "js-cookie";
 export const getData = async (id, dispatchDetail, endpoint) => {
   try {
     const response = await axios.get(
-      `${process.env.BACKEND_SERVER}/${endpoint}/${id}
+      `${process.env.NEXT_PUBLIC_BACKEND_SERVER}/${endpoint}/${id}
         `,
       {
         headers: {
@@ -23,7 +23,9 @@ export const deleteItem = async (pathname, router, endpoint) => {
   if (!pathname.endsWith("create")) {
     try {
       const response = await axios.delete(
-        `${process.env.BACKEND_SERVER}/${endpoint}/${pathname.split("/")[3]}
+        `${process.env.NEXT_PUBLIC_BACKEND_SERVER}/${endpoint}/${
+          pathname.split("/")[3]
+        }
         `,
         {
           headers: {
@@ -49,7 +51,7 @@ export const saveItem = async (
   endpoint
 ) => {
   const isCreate = pathname.endsWith("create");
-  const baseUrl = `${process.env.BACKEND_SERVER}/${endpoint}`;
+  const baseUrl = `${process.env.NEXT_PUBLIC_BACKEND_SERVER}/${endpoint}`;
   const url = isCreate ? baseUrl : `${baseUrl}/${pathname.split("/")[2]}`;
   const method = isCreate ? "post" : "patch";
 
@@ -61,13 +63,17 @@ export const saveItem = async (
     });
 
     dispatchDetail(defaultData);
-    
+
     const redirectPath = pathname.slice(0, pathname.lastIndexOf("/"));
     router.push(redirectPath);
 
     return response.data;
   } catch (error) {
     // Throw error to be handled by caller
-    throw new Error(`Failed to ${isCreate ? 'create' : 'update'} ${endpoint}: ${error.message}`);
+    throw new Error(
+      `Failed to ${isCreate ? "create" : "update"} ${endpoint}: ${
+        error.message
+      }`
+    );
   }
 };

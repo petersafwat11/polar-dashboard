@@ -10,19 +10,22 @@ const page = async (props) => {
   const search = searchParams?.search || "";
   let newsData;
   try {
-    newsData = await axios.get(`${process.env.BACKEND_SERVER}/courses`, {
-      params: {
-        page: page,
-        limit: rows,
-        searchValue: search,
-        or: [
-          "courseCategory",
-          "packageName",
-          "packageDescription",
-          "packagePrice",
-        ],
-      },
-    });
+    newsData = await axios.get(
+      `${process.env.NEXT_PUBLIC_BACKEND_SERVER}/courses`,
+      {
+        params: {
+          page: page,
+          limit: rows,
+          searchValue: search,
+          or: [
+            "courseCategory",
+            "packageName",
+            "packageDescription",
+            "packagePrice",
+          ],
+        },
+      }
+    );
   } catch (err) {
     console.log("err", err);
   }

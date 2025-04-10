@@ -10,19 +10,22 @@ const page = async (props) => {
   const search = searchParams?.search || "";
   let newsData;
   try {
-    newsData = await axios.get(`${process.env.BACKEND_SERVER}/testimonials`, {
-      params: {
-        page: page,
-        limit: rows,
-        searchValue: search,
-        or: [
-          "courseCategory",
-          "packageName",
-          "packageDescription",
-          "packagePrice",
-        ],
-      },
-    });
+    newsData = await axios.get(
+      `${process.env.NEXT_PUBLIC_BACKEND_SERVER}/testimonials`,
+      {
+        params: {
+          page: page,
+          limit: rows,
+          searchValue: search,
+          or: [
+            "courseCategory",
+            "packageName",
+            "packageDescription",
+            "packagePrice",
+          ],
+        },
+      }
+    );
   } catch (err) {}
   const paginations = {
     results: newsData?.data?.results,
@@ -33,7 +36,6 @@ const page = async (props) => {
       <h1 className={classes["title"]}>Testimonials </h1>
       <Wrapper dataFetched={newsData?.data} paginations={paginations} />
     </div>
-
   );
 };
 

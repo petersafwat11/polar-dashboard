@@ -35,7 +35,7 @@ const LoginForm = () => {
     setIsLoading(true);
     try {
       const response = await axios.post(
-        `${process.env.BACKEND_SERVER}/users/login`,
+        `${process.env.NEXT_PUBLIC_BACKEND_SERVER}/users/login`,
         data
       );
 
@@ -43,14 +43,14 @@ const LoginForm = () => {
       Cookies.set("trading-token", response.data.token, {
         expires: 1,
         secure: process.env.NODE_ENV === "production",
-        sameSite: "Lax"  // Changed from "strict" to "Lax"
+        sameSite: "Lax", // Changed from "strict" to "Lax"
       });
 
       // Store user data
       Cookies.set("trading-user", JSON.stringify(response.data.data.user), {
         expires: 1,
         secure: process.env.NODE_ENV === "production",
-        sameSite: "Lax"
+        sameSite: "Lax",
       });
 
       toast.success("Login successful!");
@@ -104,8 +104,8 @@ const LoginForm = () => {
           required
         />
 
-        <button 
-          onClick={handleSubmit} 
+        <button
+          onClick={handleSubmit}
           className={classes["login-button"]}
           disabled={isLoading}
         >

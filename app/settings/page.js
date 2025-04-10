@@ -7,7 +7,9 @@ import axios from "axios";
 const page = async () => {
   let socialData;
   try {
-    socialData = await axios.get(`${process.env.BACKEND_SERVER}/social`);
+    socialData = await axios.get(
+      `${process.env.NEXT_PUBLIC_BACKEND_SERVER}/social`
+    );
   } catch (err) {
     console.log("err", err);
   }

@@ -16,7 +16,7 @@ export const flagItem = async (itemID, itemsArray, setItemsArray, endpoint) => {
   console.log("item.flagged", item.flagged);
   try {
     const updatedItem = await axios.patch(
-      `${process.env.BACKEND_SERVER}/${endpoint}/${itemID}
+      `${process.env.NEXT_PUBLIC_BACKEND_SERVER}/${endpoint}/${itemID}
         `,
       { flagged: !item.flagged },
       {
@@ -47,12 +47,15 @@ export const deleteItem = async (
     return !selectedItems.includes(item._id);
   });
   try {
-    await axios.delete(`${process.env.BACKEND_SERVER}/${endpoint}`, {
-      data: selectedItems,
-      headers: {
-        Authorization: `Bearer ${Cookies.get("token")}`,
-      },
-    });
+    await axios.delete(
+      `${process.env.NEXT_PUBLIC_BACKEND_SERVER}/${endpoint}`,
+      {
+        data: selectedItems,
+        headers: {
+          Authorization: `Bearer ${Cookies.get("token")}`,
+        },
+      }
+    );
 
     setAllItems(remainingItems);
     setSelectedItems([]);
