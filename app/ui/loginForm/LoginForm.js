@@ -60,6 +60,7 @@ const LoginForm = () => {
         router.refresh(); // Force a refresh of the page
       }, 1000);
     } catch (error) {
+      console.log("error", error);
       toast.error(error.response?.data?.message || "Login failed");
     } finally {
       setIsLoading(false);
