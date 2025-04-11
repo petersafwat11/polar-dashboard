@@ -6,9 +6,9 @@ const nextConfig = {
     // STATIC_SERVER: "http://localhost:8000",
     // trading-backend-production-5af8.up.railway.app
     NEXT_PUBLIC_BACKEND_SERVER:
-      "https://trading-backend-production-5af8.up.railway.app/api",
+      "https://trading-backend-production-9c14.up.railway.app/api",
     NEXT_PUBLIC_STATIC_SERVER:
-      "https://trading-backend-production-5af8.up.railway.app",
+      "https://trading-backend-production-9c14.up.railway.app",
     // FRONTEND_SERVER: "trading-backend-production-5af8.up.railway.app",
     // NEXT_PUBLIC_BACKEND_SERVER: "trading-backend-production-5af8.up.railway.app/api",
     // STATIC_SERVER: "trading-backend-production-5af8.up.railway.app",
