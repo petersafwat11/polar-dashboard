@@ -1,7 +1,7 @@
 import axios from "axios";
 import Cookies from "js-cookie";
 
-export const getData = async (id, dispatchDetail, endpoint) => {
+export const getData = async (id, endpoint) => {
   try {
     const response = await axios.get(
       `${process.env.NEXT_PUBLIC_BACKEND_SERVER}/${endpoint}/${id}
@@ -12,19 +12,26 @@ export const getData = async (id, dispatchDetail, endpoint) => {
         },
       }
     );
+    return response.data.data.data;
     console.log("response", response);
-    dispatchDetail({ type: "UPDATE-ALL", value: response.data.data.data });
+    // dispatchDetail({ type: "UPDATE-ALL", value: response.data.data.data });
   } catch (error) {
-    dispatchDetail({ type: "NOT-FOUND", value: error.response.data.message });
+    // dispatchDetail({ type: "NOT-FOUND", value: error.response.data.message });
     console.log("error", error);
   }
 };
 export const deleteItem = async (pathname, router, endpoint) => {
   if (!pathname.endsWith("create")) {
+    console.log(
+      "pathname",
+      `${process.env.NEXT_PUBLIC_BACKEND_SERVER}/${endpoint}/${
+        pathname.split("/")[2]
+      }`
+    );
     try {
       const response = await axios.delete(
         `${process.env.NEXT_PUBLIC_BACKEND_SERVER}/${endpoint}/${
-          pathname.split("/")[3]
+          pathname.split("/")[2]
         }
         `,
         {

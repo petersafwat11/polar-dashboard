@@ -40,14 +40,14 @@ const LoginForm = () => {
       );
 
       // Store token in cookie
-      Cookies.set("trading-token", response.data.token, {
+      Cookies.set("jwt", response.data.token, {
         expires: 1,
         secure: process.env.NODE_ENV === "production",
         sameSite: "Lax", // Changed from "strict" to "Lax"
       });
 
       // Store user data
-      Cookies.set("trading-user", JSON.stringify(response.data.data.user), {
+      Cookies.set("user", JSON.stringify(response.data.data.user), {
         expires: 1,
         secure: process.env.NODE_ENV === "production",
         sameSite: "Lax",

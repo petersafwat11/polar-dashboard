@@ -12,8 +12,8 @@ export function middleware(request) {
     return NextResponse.next();
   }
 
-  const token = request.cookies.get("trading-token");
-  const userCookie = request.cookies.get("trading-user");
+  const token = request.cookies.get("jwt");
+  const userCookie = request.cookies.get("user");
 
   // Allow access to login page without authentication
   if (pathname === "/login") {

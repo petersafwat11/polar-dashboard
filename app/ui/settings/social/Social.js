@@ -9,25 +9,24 @@ import { toast, Toaster } from "react-hot-toast";
 import Cookies from "js-cookie";
 
 const Social = ({ socialData }) => {
+  console.log("socialData", socialData);
   const defaultData = {
     facebook: "",
     twitter: "",
     instagram: "",
   };
   const [data, setData] = useState(
-    socialData?.data && socialData?.data.length > 0
-      ? socialData?.data[0]
-      : defaultData
+    socialData && socialData.length > 0 ? socialData[0] : defaultData
   );
 
   const handleSubmit = async () => {
     console.log(
       "data",
-      `${process.env.NEXT_PUBLIC_BACKEND_SERVER}/social/${socialData.data[0]?._id}`
+      `${process.env.NEXT_PUBLIC_BACKEND_SERVER}/social/${data?._id}`
     );
     try {
       const response = await axios.patch(
-        `${process.env.NEXT_PUBLIC_BACKEND_SERVER}/social/${socialData.data[0]?._id}`,
+        `${process.env.NEXT_PUBLIC_BACKEND_SERVER}/social/${data?._id}`,
         data
         // {
         //   headers: {

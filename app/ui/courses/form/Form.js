@@ -33,7 +33,7 @@ const TextArea = memo(
 
 TextArea.displayName = "TextArea";
 
-const Form = () => {
+const Form = ({ data }) => {
   const pathname = usePathname();
   const router = useRouter();
   const defaultData = {
@@ -44,7 +44,7 @@ const Form = () => {
     x: "",
 
   };
-  const [formData, setFormData] = useState(defaultData);
+  const [formData, setFormData] = useState(data ? data : defaultData);
 
   const deletepage = async () => {
     deleteItem(pathname, router, "courses");
@@ -52,7 +52,7 @@ const Form = () => {
   const saveChanges = () => {
     saveItem(pathname, formData, setFormData, defaultData, router, "courses");
   };
-
+  console.log("data", data);
   return (
     <div className={`${inter.className} ${classes["container"]}`}>
       <div className={classes["first"]}>

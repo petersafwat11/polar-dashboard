@@ -63,3 +63,13 @@ export const deleteItem = async (
     console.log("error", error);
   }
 };
+export const getData = async (endpoint) => {
+  try {
+    const data = await axios.get(
+      `${process.env.NEXT_PUBLIC_BACKEND_SERVER}/${endpoint}`
+    );
+    return data.data.data.data;
+  } catch (error) {
+    console.log("error", error);
+  }
+};
