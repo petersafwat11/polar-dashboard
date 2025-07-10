@@ -14,6 +14,9 @@ const Social = ({ socialData }) => {
     facebook: "",
     twitter: "",
     instagram: "",
+    youtube: "",
+    linkedin: "",
+    whatsapp: "",
   };
   const [data, setData] = useState(
     socialData && socialData.length > 0 ? socialData[0] : defaultData
@@ -81,6 +84,36 @@ const Social = ({ socialData }) => {
           label={"Instagram Link"}
           data={data}
           dataKey={"instagram"}
+          setData={setData}
+        />
+        <InputGroup
+          placeHolder={"Enter youtube link"}
+          handleKeyDown={handleKeyDown}
+          id={"youtube"}
+          type={"text"}
+          label={"Youtube Link"}
+          data={data}
+          dataKey={"youtube"}
+          setData={setData}
+        />
+        <InputGroup
+          placeHolder={"Enter linkedin link"}
+          handleKeyDown={handleKeyDown}
+          id={"linkedin"}
+          type={"text"}
+          label={"Linkedin Link"}
+          data={data}
+          dataKey={"linkedin"}
+          setData={setData}
+        />
+        <InputGroup
+          placeHolder={"Enter whatsapp link"}
+          handleKeyDown={handleKeyDown}
+          id={"whatsapp"}
+          type={"text"}
+          label={"Whatsapp Link"}
+          data={data}
+          dataKey={"whatsapp"}
           setData={setData}
         />
       </div>

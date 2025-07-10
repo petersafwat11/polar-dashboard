@@ -6,28 +6,48 @@ import InputGroup from "../inputGroup/InputGroup";
 import SaveBtn from "../../saveBtn/SaveBtn";
 import axios from "axios";
 import { toast } from "react-hot-toast";
+
 const ChangePassword = ({ userData }) => {
   const [data, setData] = useState({
-    oldPassword: "",
-    newPassword: "",
+    passwordCurrent: "",
+    password: "",
+    passwordConfirm: "",
   });
+  const [loading, setLoading] = useState(false);
+
   const handleSubmit = async () => {
+    if (data.password !== data.passwordConfirm) {
+      toast.error("Passwords do not match!");
+      return;
+    }
+
+    setLoading(true);
     try {
       const response = await axios.patch(
         `${process.env.NEXT_PUBLIC_BACKEND_SERVER}/users/updateMyPassword`,
-        { id: userData._id, currentPassword: data.oldPassword, password: data.newPassword }
+        data,
+        {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
+        }
       );
-      toast.success("Password updated successfully");
-      setData({
-        oldPassword: "",
-        newPassword: "",
-      });
-      console.log("response", response);
+
+      if (response.data.status === "success") {
+        toast.success("Password updated successfully");
+        setData({
+          passwordCurrent: "",
+          password: "",
+          passwordConfirm: "",
+        });
+      }
     } catch (error) {
-      toast.error("Password update failed");
-      console.log("error", error);
-    } 
+      toast.error(error.response?.data?.message || "Password update failed");
+    } finally {
+      setLoading(false);
+    }
   };
+
   const handleKeyDown = (event) => {
     if (event.key === "Enter") {
       handleSubmit();
@@ -39,28 +59,38 @@ const ChangePassword = ({ userData }) => {
       <h3 className={classes["title"]}>Change login password</h3>
       <div className={classes["passwords"]}>
         <InputGroup
-          placeHolder={"Enter old Password"}
+          placeHolder={"Enter current password"}
           handleKeyDown={handleKeyDown}
-          id={"oldPassword"}
+          id={"passwordCurrent"}
           type={"password"}
-          label={"Old Password"}
+          label={"Current Password"}
           data={data}
-          dataKey={"oldPassword"}
+          dataKey={"passwordCurrent"}
           setData={setData}
         />
         <InputGroup
-          placeHolder={"Enter new Password"}
+          placeHolder={"Enter new password"}
           handleKeyDown={handleKeyDown}
-          id={"newPassword"}
+          id={"password"}
           type={"password"}
           label={"New Password"}
           data={data}
-          dataKey={"newPassword"}
+          dataKey={"password"}
+          setData={setData}
+        />
+        <InputGroup
+          placeHolder={"Confirm new password"}
+          handleKeyDown={handleKeyDown}
+          id={"passwordConfirm"}
+          type={"password"}
+          label={"Confirm New Password"}
+          data={data}
+          dataKey={"passwordConfirm"}
           setData={setData}
         />
       </div>
       <div className={classes["btn"]}>
-        <SaveBtn saveChanges={handleSubmit} />
+        <SaveBtn saveChanges={handleSubmit} disabled={loading} />
       </div>
     </div>
   );

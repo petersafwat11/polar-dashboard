@@ -7,7 +7,7 @@ import { getData } from "../lib/tabelsPages";
 import { cookies } from "next/headers";
 
 const page = async () => {
-  const socialData = await getData("social") || null;
+  const socialData = (await getData("social")) || null;
   const cookieStore = cookies();
   const userData = JSON.parse(cookieStore.get("user")?.value) || null;
   console.log("userData", userData);

@@ -35,7 +35,7 @@ const LoginForm = () => {
     setIsLoading(true);
     try {
       const response = await axios.post(
-        `${process.env.NEXT_PUBLIC_BACKEND_SERVER}/users/login`,
+        `${process.env.NEXT_PUBLIC_BACKEND_SERVER}/admins/login`,
         data
       );
 
