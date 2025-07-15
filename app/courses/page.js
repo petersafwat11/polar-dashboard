@@ -2,6 +2,7 @@ import React from "react";
 import classes from "./page.module.css";
 import axios from "axios";
 import Wrapper from "../ui/courses/wrapper/Wrapper";
+
 const page = async (props) => {
   const searchParams = await props.searchParams;
 
@@ -18,10 +19,11 @@ const page = async (props) => {
           limit: rows,
           searchValue: search,
           or: [
-            "courseCategory",
-            "packageName",
-            "packageDescription",
-            "packagePrice",
+            "category",
+            "title",
+            "description",
+            "price",
+            "level",
           ],
         },
       }
@@ -35,7 +37,7 @@ const page = async (props) => {
   };
   return (
     <div className={classes["container"]}>
-      <h1 className={classes["title"]}>Courses </h1>
+      <h1 className={classes["title"]}>Courses</h1>
       <Wrapper dataFetched={newsData?.data} paginations={paginations} />
     </div>
   );
