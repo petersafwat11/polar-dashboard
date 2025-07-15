@@ -1,64 +1,323 @@
 .container {
   display: flex;
   flex-direction: column;
-  gap: 30px;
+  gap: 40px;
+  padding: 20px;
 }
-.first {
+
+.first-row {
   display: flex;
-  gap: 82px;
+  gap: 40px;
+  flex-wrap: wrap;
 }
+
+.second-row {
+  display: flex;
+  gap: 40px;
+  align-items: flex-start;
+  flex-wrap: wrap;
+}
+
+.third-row {
+  display: flex;
+  flex-direction: column;
+}
+
 .title {
   font-size: 20px;
   font-style: normal;
   font-weight: 500;
-  line-height: 24px; /* 120% */
+  line-height: 24px;
   text-transform: uppercase;
-}
-.package-name {
-  padding: 26px 42px 31px 35px;
-  display: flex;
-  flex-direction: column;
-  gap: 21px;
-}
-.package-description {
-  padding: 26px 31px 31px 35px;
-  display: flex;
-  flex-direction: column;
-  gap: 21px;
-}
-.package-price {
-  padding: 26px 42px 31px 35px;
-  display: flex;
-  flex-direction: column;
-  gap: 21px;
+  margin-bottom: 15px;
+  color: #333;
 }
 
-.package-description .text-area {
-  width: 400px;
-  height: 111px;
+.course-title,
+.course-description {
+  padding: 26px 35px 31px 35px;
+  display: flex;
+  flex-direction: column;
+  gap: 21px;
+  background: #f8f9fa;
+  border-radius: 15px;
+  border: 1px solid #dfeaf2;
+  min-width: 300px;
 }
+
+.price-discount {
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+  padding: 26px 35px 31px 35px;
+  background: #f8f9fa;
+  border-radius: 15px;
+  border: 1px solid #dfeaf2;
+  min-width: 300px;
+}
+
+.level-field {
+  padding: 26px 35px 31px 35px;
+  background: #f8f9fa;
+  border-radius: 15px;
+  border: 1px solid #dfeaf2;
+  min-width: 300px;
+}
+
+.discount-field {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.discount-input {
+  width: 100%;
+  height: 45px;
+  border-radius: 10px;
+  border: 1px solid #dfeaf2;
+  background: #fff;
+  outline: none;
+  padding: 0 15px;
+  font-size: 14px;
+  font-weight: 500;
+  color: #575757;
+}
+
+.discount-input:focus {
+  border-color: #007bff;
+  box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.25);
+}
+
 .text-area {
-  width: 244px;
-  height: 101px;
+  width: 100%;
+  min-height: 101px;
   border-radius: 15px;
   border: 1px solid #dfeaf2;
   background: #fff;
   outline: none;
-  resize: none;
+  resize: vertical;
   padding: 14px 18px;
   font-size: 13px;
   font-style: normal;
   font-weight: 500;
   line-height: normal;
-  text-transform: lowercase;
   color: #575757;
 }
-.second {
+
+.text-area:focus {
+  border-color: #007bff;
+  box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.25);
+}
+
+.course-description .text-area {
+  min-height: 120px;
+}
+
+/* Reviews Section Styles */
+.reviews-section {
+  padding: 30px 35px;
+  background: #f8f9fa;
+  border-radius: 15px;
+  border: 1px solid #dfeaf2;
   display: flex;
-  gap: 96px;
+  flex-direction: column;
+  gap: 25px;
+}
+
+.reviews-list {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.review-item {
+  background: #fff;
+  border-radius: 12px;
+  padding: 20px;
+  border: 1px solid #e9ecef;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.review-display {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.review-header {
+  display: flex;
+  justify-content: space-between;
   align-items: center;
 }
+
+.reviewer-name {
+  font-weight: 600;
+  font-size: 16px;
+  color: #333;
+}
+
+.rating {
+  color: #ffc107;
+  font-weight: 500;
+  font-size: 14px;
+}
+
+.review-text {
+  color: #666;
+  line-height: 1.5;
+  margin: 0;
+}
+
+.review-actions {
+  display: flex;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.edit-btn,
+.delete-btn,
+.save-btn,
+.cancel-btn {
+  padding: 8px 16px;
+  border-radius: 6px;
+  border: none;
+  font-size: 12px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.edit-btn {
+  background: #007bff;
+  color: white;
+}
+
+.edit-btn:hover {
+  background: #0056b3;
+}
+
+.delete-btn {
+  background: #dc3545;
+  color: white;
+}
+
+.delete-btn:hover {
+  background: #c82333;
+}
+
+.save-btn {
+  background: #28a745;
+  color: white;
+}
+
+.save-btn:hover {
+  background: #218838;
+}
+
+.cancel-btn {
+  background: #6c757d;
+  color: white;
+}
+
+.cancel-btn:hover {
+  background: #5a6268;
+}
+
+.review-edit {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.review-input {
+  width: 100%;
+  height: 40px;
+  border-radius: 8px;
+  border: 1px solid #dfeaf2;
+  background: #fff;
+  outline: none;
+  padding: 0 12px;
+  font-size: 14px;
+  color: #575757;
+}
+
+.review-input:focus {
+  border-color: #007bff;
+  box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.25);
+}
+
+.review-textarea {
+  width: 100%;
+  min-height: 80px;
+  border-radius: 8px;
+  border: 1px solid #dfeaf2;
+  background: #fff;
+  outline: none;
+  resize: vertical;
+  padding: 12px;
+  font-size: 14px;
+  color: #575757;
+  font-family: inherit;
+}
+
+.review-textarea:focus {
+  border-color: #007bff;
+  box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.25);
+}
+
+.add-review-btn {
+  padding: 12px 24px;
+  background: #007bff;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.2s ease;
+  align-self: flex-start;
+}
+
+.add-review-btn:hover {
+  background: #0056b3;
+}
+
+.add-review-form {
+  background: #fff;
+  border-radius: 12px;
+  padding: 20px;
+  border: 1px solid #e9ecef;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
 .actions {
   display: flex;
   gap: 35px;
+  justify-content: center;
+  padding-top: 20px;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .first-row,
+  .second-row {
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .course-title,
+  .course-description,
+  .price-discount,
+  .level-field {
+    min-width: unset;
+    width: 100%;
+  }
+
+  .actions {
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+  }
 }
